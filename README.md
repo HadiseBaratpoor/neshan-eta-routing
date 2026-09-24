@@ -1,5 +1,9 @@
 # Time-dependent ETA prediction and routing
 
+<p align="center">
+  <img src="docs/architecture.svg" alt="ETA routing system architecture" width="100%">
+</p>
+
 A routing engine that answers the question a navigation app is actually for:
 **given where I am, where I'm going, and what today looks like — how long will
 it take, which way should I go, and when should I leave?**

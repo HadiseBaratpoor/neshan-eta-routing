@@ -1,0 +1,66 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 650" role="img" aria-labelledby="title desc">
+  <title id="title">ETA routing system architecture</title>
+  <desc id="desc">Traffic observations and road network flow through cleaning, hierarchical speed estimation, FIFO travel-time evaluation, time-dependent routing, departure planning, and validated submission.</desc>
+  <defs>
+    <linearGradient id="bg" x2="0" y2="1"><stop stop-color="#0b1220"/><stop offset="1" stop-color="#111c2e"/></linearGradient>
+    <linearGradient id="hero" x2="1" y2="1"><stop stop-color="#0c4a6e"/><stop offset="1" stop-color="#164e63"/></linearGradient>
+    <pattern id="grid" width="32" height="32" patternUnits="userSpaceOnUse"><path d="M32 0H0V32" fill="none" stroke="#26364a" stroke-width=".7"/></pattern>
+    <marker id="arrow" markerWidth="10" markerHeight="10" refX="8" refY="5" orient="auto"><path d="M0 0L10 5L0 10z" fill="#7dd3fc"/></marker>
+    <style>
+      text{font-family:Inter,ui-sans-serif,system-ui,-apple-system,"Segoe UI",sans-serif;fill:#e5eefb}
+      .title{font-size:30px;font-weight:750;letter-spacing:-.4px}.sub{font-size:14px;fill:#9fb2c9}
+      .head{font-size:16px;font-weight:700}.body{font-size:12px;fill:#c0ccda}.small{font-size:11px;fill:#9fb2c9}
+      .box{stroke-width:1.4}.arrow{fill:none;stroke:#7dd3fc;stroke-width:2;marker-end:url(#arrow)}
+      .chip{font-size:10px;font-weight:650;letter-spacing:.25px}
+    </style>
+  </defs>
+  <rect width="1200" height="650" rx="20" fill="url(#bg)"/><rect width="1200" height="650" rx="20" fill="url(#grid)" opacity=".55"/>
+  <text x="54" y="62" class="title">From traffic signals to route + ETA</text>
+  <text x="55" y="89" class="sub">Neshan ETA Routing · interpretable speed profiles, FIFO-safe edge costs, time-dependent path search</text>
+
+  <!-- input sources -->
+  <rect x="54" y="142" width="208" height="100" rx="12" fill="#111d2d" stroke="#64748b" class="box"/>
+  <text x="74" y="172" class="head">Road network</text><text x="74" y="196" class="body">nodes · directed edges</text><text x="74" y="217" class="small">IDs · lengths (m)</text>
+  <rect x="54" y="270" width="208" height="100" rx="12" fill="#111d2d" stroke="#64748b" class="box"/>
+  <text x="74" y="300" class="head">Probe observations</text><text x="74" y="324" class="body">speed · time · weather</text><text x="74" y="345" class="small">holiday · edge ID</text>
+  <rect x="54" y="398" width="208" height="100" rx="12" fill="#111d2d" stroke="#64748b" class="box"/>
+  <text x="74" y="428" class="head">Trip requests</text><text x="74" y="452" class="body">source · destination</text><text x="74" y="473" class="small">departure · conditions</text>
+
+  <!-- stages -->
+  <rect x="318" y="270" width="190" height="100" rx="12" fill="#102b36" stroke="#22d3ee" class="box"/>
+  <text x="338" y="301" class="head">Clean &amp; normalize</text><text x="338" y="326" class="body">physical bounds</text><text x="338" y="347" class="small">MAD outlier filtering</text>
+
+  <rect x="566" y="270" width="224" height="100" rx="12" fill="#102c2a" stroke="#34d399" class="box"/>
+  <text x="586" y="301" class="head">Speed profiles</text><text x="586" y="326" class="body">city × edge × time</text><text x="586" y="347" class="small">weather · holiday · shrinkage</text>
+
+  <rect x="566" y="426" width="224" height="94" rx="12" fill="#302413" stroke="#fbbf24" class="box"/>
+  <text x="586" y="456" class="head">FIFO edge costs</text><text x="586" y="481" class="body">speed → seconds</text><text x="586" y="502" class="small">interpolated arrival profiles</text>
+
+  <rect x="848" y="270" width="190" height="100" rx="12" fill="#102c2a" stroke="#34d399" class="box"/>
+  <text x="868" y="301" class="head">Time-dependent</text><text x="868" y="326" class="body">Dijkstra routing</text><text x="868" y="347" class="small">reprice each edge on arrival</text>
+
+  <rect x="848" y="426" width="190" height="94" rx="12" fill="#102c2a" stroke="#34d399" class="box"/>
+  <text x="868" y="456" class="head">Departure planner</text><text x="868" y="481" class="body">sweep departure times</text><text x="868" y="502" class="small">best leave / arrive-by</text>
+
+  <rect x="1080" y="270" width="92" height="100" rx="12" fill="url(#hero)" stroke="#38bdf8" class="box"/>
+  <text x="1091" y="301" class="head">Route</text><text x="1091" y="326" class="body">path</text><text x="1091" y="347" class="body">+ ETA</text>
+
+  <!-- validation output -->
+  <rect x="996" y="554" width="176" height="56" rx="10" fill="#301923" stroke="#fb7185" class="box"/>
+  <text x="1011" y="578" class="head" style="font-size:14px">Validate &amp; export</text><text x="1011" y="596" class="small">schema · graph edges</text>
+
+  <!-- connectors -->
+  <path d="M262 320H310" class="arrow"/><path d="M508 320H558" class="arrow"/>
+  <path d="M262 192H536Q550 192 550 206V456H558" class="arrow"/>
+  <path d="M678 370V418" class="arrow"/><path d="M790 473H840" class="arrow"/>
+  <path d="M790 320H840" class="arrow"/><path d="M943 370V418" class="arrow"/>
+  <path d="M1038 320H1072" class="arrow"/><path d="M1038 473H1060Q1072 473 1072 461V350" class="arrow"/>
+  <path d="M1126 370V546" class="arrow"/><path d="M262 448H300Q312 448 312 436V370" class="arrow"/>
+
+  <rect x="54" y="554" width="900" height="56" rx="10" fill="#111d2d" stroke="#26364a"/>
+  <circle cx="78" cy="582" r="5" fill="#22d3ee"/><text x="91" y="586" class="chip">DATA</text>
+  <circle cx="177" cy="582" r="5" fill="#34d399"/><text x="190" y="586" class="chip">MODEL + ROUTING</text>
+  <circle cx="352" cy="582" r="5" fill="#fbbf24"/><text x="365" y="586" class="chip">TIME-DEPENDENT COSTS</text>
+  <circle cx="570" cy="582" r="5" fill="#fb7185"/><text x="583" y="586" class="chip">OUTPUT VALIDATION</text>
+  <text x="54" y="632" class="small">Synthetic data generator supports a reproducible end-to-end run; challenge data stays local.</text>
+</svg>

@@ -1,0 +1,17 @@
+__pycache__/
+*.py[cod]
+*.egg-info/
+.venv/
+venv/
+.pytest_cache/
+.ipynb_checkpoints/
+.DS_Store
+
+# Generated data and artefacts - regenerate with scripts/make_synthetic_data.py
+data/raw/*.csv
+data/raw/*.gpickle
+data/processed/
+reports/figures/
+reports/*.csv
+reports/*.json
+!data/raw/.gitkeep
